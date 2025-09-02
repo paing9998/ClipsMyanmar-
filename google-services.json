@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "154463833111",
+    "project_id": "movie-app-1b19e",
+    "storage_bucket": "movie-app-1b19e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154463833111:android:48a7ea0903a3bff8dca052",
+        "android_client_info": {
+          "package_name": "com.mm.clipsmyanmar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "154463833111-3320dkd59v2jbvg5d93aga4ufjg5ktd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG2c2fz5M2ywwvKuAjfIrucwTg15r4pK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154463833111-3320dkd59v2jbvg5d93aga4ufjg5ktd2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
