@@ -1,7 +1,11 @@
-name: Android CI Build
+# GitHub Actions Workflow for Building the Android App (APK)
+# Android App (APK) ကို Build ရန်အတွက် GitHub Actions Workflow
+name: Build Android APK
 
 on:
   push:
+    branches: [ "main" ]
+  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -9,34 +13,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      # 1. Checks-out your repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: gradle
+      # 2. Set up JDK 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      # 3. Setup Gradle caching
+      - name: Setup Gradle
+        uses: actions/setup-gradle@v3
 
-    - name: Decode google-services.json
-      env:
-        GOOGLE_SERVICES_JSON_B64: ${{ secrets.GOOGLE_SERVICES_JSON_B64 }}
-      run: |
-        echo $GOOGLE_SERVICES_JSON_B64 | base64 --decode > app/google-services.json
+      # 4. Decode Keystore from GitHub Secrets
+      - name: Decode Keystore
+        env:
+          SIGNING_KEY_STORE_BASE64: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+        run: |
+          echo "Decoding Keystore..."
+          echo $SIGNING_KEY_STORE_BASE64 | base64 --decode > ${{ github.workspace }}/app/release-keystore.jks
+          echo "Keystore decoded successfully."
 
-    - name: Build with Gradle
-      run: ./gradlew assembleDebug
+      # 5. Build the release APK (.apk)
+      #    Release APK (.apk) ကို build လုပ်ခြင်း (*** ဤနေရာတွင် ပြောင်းထားသည် ***)
+      - name: Build with Gradle
+        env:
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: ./gradlew assembleRelease
 
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: debug-apk
-        path: app/build/outputs/apk/debug/app-debug.apk
+      # 6. Upload the generated APK as an artifact
+      #    Build လုပ်ပြီးသား APK ကို artifact အဖြစ် upload တင်ခြင်း (*** ဤနေရာတွင် ပြောင်းထားသည် ***)
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/app-release.apk
 
 
