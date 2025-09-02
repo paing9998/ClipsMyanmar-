@@ -1,0 +1,50 @@
+name: Android CI Build
+
+# main branch ကို push တင်လိုက်တိုင်း ဒီ workflow ကို run မယ်
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # နောက်ဆုံးပေါ် ubuntu server မှာ run မယ်
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Code တွေကို server ပေါ်ကို checkout လုပ်မယ်
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Step 2: Java (JDK 17) ကို install လုပ်မယ်
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    # Step 3: Gradle wrapper ကို executable permission ပေးမယ်
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # Step 4: google-services.json ကို setup လုပ်မယ်
+    # ဒီနေရာမှာ GitHub Secrets ကိုသုံးရပါမယ်။ repository settings ထဲမှာ
+    # GOOGLE_SERVICES_JSON ဆိုတဲ့ secret နာမည်နဲ့ google-services.json ရဲ့ content အပြည့်အစုံကို
+    # သွားထည့်ထားပေးရပါမယ်။
+    - name: Decode google-services.json
+      env:
+        GOOGLE_SERVICES_JSON_B64: ${{ secrets.GOOGLE_SERVICES_JSON_B64 }}
+      run: |
+        echo $GOOGLE_SERVICES_JSON_B64 | base64 --decode > app/google-services.json
+
+    # Step 5: Debug APK ကို build ဆွဲမယ်
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug
+
+    # Step 6: Build ပြီးသွားတဲ့ APK ကို Artifact အနေနဲ့ upload လုပ်မယ်
+    # ဒါမှ နောက်ပိုင်း download ပြန်ဆွဲလို့ရမယ်
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug-apk
+        path: app/build/outputs/apk/debug/app-debug.apk
