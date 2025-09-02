@@ -1,14 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.google.gms.google.services)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt.android)
     kotlin("kapt")
-    id("com.android.application")
-    // Add the Google services Gradle plugin
-  id("com.google.gms.google-services")
-  
 }
 
 android {
@@ -17,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.clipsmyanmar"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -68,37 +62,10 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    // Navigation
-    implementation(libs.androidx.navigation.compose)
-
-    // Hilt
+    // Hilt - Dependency Injection
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
-
-    // Firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.auth.ktx)
-    implementation(libs.firebase.firestore.ktx)
-    implementation(libs.firebase.storage.ktx)
-    implementation(libs.firebase.functions.ktx)
-    implementation(libs.play.services.auth) // Google Sign-In
-
-    // Networking (Retrofit, OkHttp, kotlinx.serialization)
-    implementation(libs.retrofit)
-    implementation(libs.converter.kotlinx.serialization)
-    implementation(libs.okhttp)
-    implementation(libs.kotlinx.serialization.json)
-
-    // Image Loading
-    implementation(libs.coil.compose)
-
-    // DataStore (for settings/language)
-    implementation(libs.androidx.datastore.preferences)
-
-    // Lifecycle
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.lifecycle.runtime.compose)
 
     // Testing
     testImplementation(libs.junit)
@@ -110,18 +77,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 
+// Allow references to generated code
 kapt {
     correctErrorTypes = true
-  // Import the Firebase BoM
-  implementation(platform("com.google.firebase:firebase-bom:34.2.0"))
-
-
-  // TODO: Add the dependencies for Firebase products you want to use
-  // When using the BoM, don't specify versions in Firebase dependencies
-  implementation("com.google.firebase:firebase-analytics")
-
-
-  // Add the dependencies for any other desired Firebase products
-  // https://firebase.google.com/docs/android/setup#available-libraries
 }
-

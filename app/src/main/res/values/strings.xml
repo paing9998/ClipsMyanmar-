@@ -2,9 +2,10 @@
     <string name="app_name">ClipsMyanmar</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="home">Home</string>
-    <string name="admin_panel">Admin Panel</string>
-    <string name="generate_with_gemini">Generate with Gemini ✨</string>
+    <string name="no_account_sign_up">No account yet? Sign Up</string>
+    <string name="has_account_sign_in">Already have an account? Sign In</string>
+    <string name="admin_movie_list">Admin Movie List</string>
+    <string name="admin_movie_form">Admin Movie Form</string>
+    <string name="generate_with_gemini">Generate with Gemini</string>
+    <string name="upload_poster">Upload Poster</string>
 </resources>

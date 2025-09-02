@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">ClipsMyanmar</string>
-    <string name="sign_in">အကောင့်ဝင်ရန်</string>
+    <string name="sign_in">ဝင်ရောက်ရန်</string>
     <string name="sign_up">အကောင့်ဖွင့်ရန်</string>
-    <string name="email">အီးမေးလ်</string>
-    <string name="password">စကားဝှက်</string>
-    <string name="home">ပင်မစာမျက်နှာ</string>
-    <string name="admin_panel">အက်မင်အဖွဲ့</string>
-    <string name="generate_with_gemini">Gemini ဖြင့် ဖန်တီးပါ ✨</string>
+    <string name="no_account_sign_up">အကောင့်မရှိသေးဘူးလား? အကောင့်ဖွင့်ပါ</string>
+    <string name="has_account_sign_in">အကောင့်ရှိပြီးသားလား? ဝင်ရောက်ပါ</string>
+    <string name="admin_movie_list">အက်ဒမင် ရုပ်ရှင်စာရင်း</string>
+    <string name="admin_movie_form">အက်ဒမင် ရုပ်ရှင်ပုံစံ</string>
+    <string name="generate_with_gemini">Gemini ဖြင့် ဖန်တီးပါ</string>
+    <string name="upload_poster">ပိုစတာ တင်ရန်</string>
 </resources>

@@ -1,29 +1,32 @@
-# Clips Myanmar (မြန်မာကလစ်များ)
+# ClipsMyanmar Android App
 
-မြန်မာနိုင်ငံမှ စိတ်ဝင်စားဖွယ်ရာ၊ ရယ်စရာကောင်းသော၊ အသိပညာပေး ဗီဒီယိုကလစ် قصيرة များကို တစ်နေရာတည်းတွင် စုစည်းထားသော repository ဖြစ်ပါသည်။
+This is the initial project setup for the ClipsMyanmar Android application, built with modern Android development practices.
 
-## 📂 အမျိုးအစားများ (Categories)
+## Project Setup
 
-ကျွန်ုပ်တို့သည် ကလစ်များကို အောက်ပါအမျိုးအစားများအလိုက် ခွဲခြားထားပါသည်-
+The project is configured with the following key technologies:
 
-* 🤣 **Funny Clips** - ရယ်စရာ ဟာသကလစ်များ
-* 📚 **Knowledge** - အသိပညာပေး ဗီဒီယိုတိုများ
-* 🍔 **Food & Travel** - အစားအသောက်နှင့် ခရီးသွားကလစ်များ
-* 💻 **Tech Clips** - နည်းပညာဆိုင်ရာ ကလစ်များ
-* 🎬 **Movie Clips** - ရုပ်ရှင်ဇာတ်ဝင်ခန်းတိုများ
-* (သင့်လိုအပ်ချက်အတိုင်း category များ ထပ်ထည့်နိုင်ပါသည်)
+- **Kotlin**: The primary programming language.
+- **Jetpack Compose**: For building the UI declaratively.
+- **Hilt**: For dependency injection, simplifying dependency management and improving testability.
+- **Gradle Kotlin DSL**: For managing build scripts (`build.gradle.kts`).
 
-## 🎯 ရည်ရွယ်ချက်
+### How to Run
 
-မြန်မာနိုင်ငံမှ ကောင်းမွန်သော content producer များ၏ video clip များကို လူအများ ပိုမိုလွယ်ကူစွာ ရှာဖွေကြည့်ရှုနိုင်စေရန်နှင့် ထို clip များကို မှတ်တမ်းအဖြစ် သိမ်းဆည်းထားနိုင်ရန် ရည်ရွယ်ပါသည်။
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    ```
 
-## 🤝 ပူးပေါင်းပါဝင်ရန် (How to Contribute)
+2.  **Open in Android Studio:**
+    - Open Android Studio (Hedgehog or newer is recommended).
+    - Select "Open an Existing Project" and navigate to the cloned directory.
 
-သင်ကိုယ်တိုင်လည်း ဤ repository ကို ပိုမိုကောင်းမွန်အောင် ကူညီနိုင်ပါသည်။
+3.  **Sync Gradle:**
+    - Android Studio will automatically prompt you to sync the Gradle files. This will download all the necessary dependencies defined in `app/build.gradle.kts`.
 
-1.  သင့်ထံတွင် ကောင်းမွန်သော clip အသစ်များရှိပါက `Pull Request` ပေးပို့ခြင်းဖြင့် ပူးပေါင်းပါဝင်နိုင်ပါသည်။
-2.  အမျိုးအစားများ မှားယွင်းနေပါက `Issue` เปิด၍ အကြံပြုနိုင်ပါသည်။
+4.  **Build and Run:**
+    - Select a target device (emulator or a physical device).
+    - Click the "Run 'app'" button (the green play icon) in the toolbar.
 
-## 📄 လိုင်စင် (License)
-
-ဤ repository ရှိ အကြောင်းအရာများသည် မူရင်းဖန်တီးသူများ၏ မူပိုင်ခွင့်များသာ ဖြစ်ပါသည်။ ပညာပေးရန်နှင့် ဖျော်ဖြေရေး ရည်ရွယ်ချက်များအတွက်သာ စုစည်းဖော်ပြခြင်းဖြစ်ပါသည်။
+The application is now set up with Hilt. The entry point is `ClipsMyanmarApp.kt`, which is annotated with `@HiltAndroidApp`. The `MainActivity` will need to be annotated with `@AndroidEntryPoint` to enable field injection. Dependency modules, like `AppModule.kt`, are located in the `di` package.
